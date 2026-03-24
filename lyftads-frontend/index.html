@@ -1221,7 +1221,7 @@ function openConnect(clientId){
   const conns=(c?.connections||[]).map(x=>x.platform);
   document.getElementById('connect-platform-list').innerHTML=
     Object.entries(CH_CFG).map(([key,cfg])=>`
-      <button class="oauth-btn" onclick="${key==='klaviyo'?`toggleKlaviyoInput()`:key==='shopify'?`connectShopify('${clientId}')`:key==='amazon'?`oauthConnect('${key}','${clientId}')`:key==='tiktok'?`oauthConnect('${key}','${clientId}')`:key==='google'?`oauthConnect('${key}','${clientId}')`:key==='meta'?`oauthConnect('${key}','${clientId}')`:''}`">
+<button class="oauth-btn" onclick="handlePlatformConnect(key,'${clientId}')">
         <div class="ch-ico" style="background:${cfg.color}22;color:${cfg.color};font-size:10px;font-weight:600">${cfg.ico}</div>
         ${cfg.name}
         ${conns.includes(key)?`<div class="oauth-check">✓</div>`:'<span style="margin-left:auto;font-size:10px;color:var(--txt3);">Connetti →</span>'}
@@ -1235,6 +1235,11 @@ function toggleKlaviyoInput(){
   w.style.display=w.style.display==='none'?'block':'none';
 }
 
+   function handlePlatformConnect(key, clientId){
+  if(key==='klaviyo') toggleKlaviyoInput();
+  else if(key==='shopify') connectShopify(clientId);
+  else oauthConnect(key, clientId);
+}
 function oauthConnect(platform, clientId){
   window.location.href=`${API}/auth/${platform}/connect?clientId=${clientId}`;
 }
