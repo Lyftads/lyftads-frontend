@@ -1246,7 +1246,7 @@ function oauthConnect(platform, clientId){
 
 function connectShopify(clientId){
   const shop=prompt('Inserisci il dominio Shopify del cliente (es: mio-negozio.myshopify.com):');
-  if(shop) window.location.href=`${API}/auth/shopify/connect?clientId=${clientId}&shop=${encodeURIComponent(shop)}`;
+  if(shop) window.location.href=`${API}/auth/shopify/connect?clientId=${clientId}&shop=${encodeURIComponent(shop)}&token=${token}`;
 }
 
 async function connectKlaviyo(){
